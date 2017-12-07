@@ -81,28 +81,24 @@
 		    textarea.val(editor.getSession().getValue());
 		});
 
-		var testcase = {
+		var testcases = {
 			init: function(){
-				this.input = 'vedavyas'
-				this.output = 3
+				this.testcases = {
+					"testcase1":{input:["vedavyas"],output:[3]},
+					"testcase2":{input:["xyoxotaaloozyimjxduseo"],output:[10]}
+				}
 			},
-			inputr: function(){
-				return this.input;
-			},
-			outputr: function(){
-				return this.output;
+			get: function(testcase){
+				return this.testcases[testcase]
 			}
 		}
 
 		
 		function passinput(prompt) {
-			testcase.init()
-		    console.log(new Promise((resolve, reject) => {
-		        var inputLines = testcase.inputr();
-        		resolve(inputLines);
-		    }));
+			testcases.init()
+			input = testcases.get("testcase1").input;
 		    return new Promise((resolve, reject) => {
-		        var inputLines = testcase.inputr();
+		        let inputLines = input[0];
         		resolve(inputLines);
 		    });
 			// return window.prompt(prompt);
@@ -110,26 +106,25 @@
 
 
 		function outf(text) { 
-			testcase.init()
-		    // text = text.replace(/\n/g, "")
-		    // console.log("output: "+text)
-		    console.log("Expected: "+text);
-		    console.log("Actual: "+testcase.outputr());
-		    if (text == testcase.outputr()){
-		    	var mypre = document.getElementById("output");
-		    	mypre.innerHTML += "<b style='color:green'>Testcase Passed</b>";
-		    	mypre.innerHTML += "\nInput: "+testcase.inputr();
-		   	    mypre.innerHTML += "\nExpected: "+testcase.outputr();
-		    	mypre.innerHTML += "\nGot: "+text+"\n\n";
-		    }else{
-		    	var mypre = document.getElementById("output");
-		    	// mypre.innerHTML = ""
-		    	mypre.innerHTML += "<b style='color:red'>Testcase Failed</b>";
-		    	mypre.innerHTML += "\nInput: "+testcase.inputr();
-		    	mypre.innerHTML += "\nExpected: "+testcase.outputr();
-		    	mypre.innerHTML += "\nGot: "+text+"\n\n";
-		    }
-		    // mypre.innerHTML += text 
+			testcases.init()
+			input = testcases.get("testcase1").input[0];
+			output = testcases.get("testcase1").output[0];
+			if (text.replace(/\n/g, "") !== "") {
+			    if (text == output){
+			    	var mypre = document.getElementById("output");
+			    	mypre.innerHTML += "<b style='color:green'>Testcase Passed</b>";
+			    	mypre.innerHTML += "\nInput: "+input;
+			   	    mypre.innerHTML += "\nExpected: "+output;
+			    	mypre.innerHTML += "\nGot: "+text+"\n\n";
+			    }else{
+			    	var mypre = document.getElementById("output");
+			    	// mypre.innerHTML = ""
+			    	mypre.innerHTML += "<b style='color:red'>Testcase Failed</b>";
+			    	mypre.innerHTML += "\nInput: "+input;
+			    	mypre.innerHTML += "\nExpected: "+output;
+			    	mypre.innerHTML += "\nGot: "+text+"\n\n";
+			    }
+			}
 		}
 		
 		function builtinRead(x) {
@@ -140,10 +135,11 @@
 
 
 		function runit() { 
-		   testcase.init()
+		   testcases.init()
 		   var prog = editor.getSession().getValue(); 
 		   var mypre = document.getElementById("output"); 
 		   mypre.innerHTML = ''; 
+
 		   Sk.pre = "output";
 		   Sk.configure({inputfun:passinput, output:outf, read:builtinRead}); 
 		   var myPromise = Sk.misceval.asyncToPromise(function() {
@@ -165,7 +161,7 @@
 		    	// mypre.innerHTML = mypre.innerHTML+"Testcases failed"; 
 		   	 //    $("#output").text(err.toString());
 		        // return;
-		        sErr = e.toString(); 
+		        sErr = err.toString(); 
 				outf(sErr);
 		        $("#showoutput").click();
 		   });
