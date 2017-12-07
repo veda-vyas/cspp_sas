@@ -83,47 +83,22 @@
 
 		var testcases = {
 			init: function(){
-				this.testcases = {
+				this.tcs = {
 					"testcase1":{input:["vedavyas"],output:[3]},
 					"testcase2":{input:["xyoxotaaloozyimjxduseo"],output:[10]}
 				}
+
+				this.testcase = this.tcs["testcase1"]
+				this.count = Object.keys(this.tcs).length
 			},
-			get: function(testcase){
-				return this.testcases[testcase]
-			}
-		}
-
-		
-		function passinput(prompt) {
-			testcases.init()
-			input = testcases.get("testcase1").input;
-		    return new Promise((resolve, reject) => {
-		        let inputLines = input[0];
-        		resolve(inputLines);
-		    });
-			// return window.prompt(prompt);
-		};
-
-
-		function outf(text) { 
-			testcases.init()
-			input = testcases.get("testcase1").input[0];
-			output = testcases.get("testcase1").output[0];
-			if (text.replace(/\n/g, "") !== "") {
-			    if (text == output){
-			    	var mypre = document.getElementById("output");
-			    	mypre.innerHTML += "<b style='color:green'>Testcase Passed</b>";
-			    	mypre.innerHTML += "\nInput: "+input;
-			   	    mypre.innerHTML += "\nExpected: "+output;
-			    	mypre.innerHTML += "\nGot: "+text+"\n\n";
-			    }else{
-			    	var mypre = document.getElementById("output");
-			    	// mypre.innerHTML = ""
-			    	mypre.innerHTML += "<b style='color:red'>Testcase Failed</b>";
-			    	mypre.innerHTML += "\nInput: "+input;
-			    	mypre.innerHTML += "\nExpected: "+output;
-			    	mypre.innerHTML += "\nGot: "+text+"\n\n";
-			    }
+			getTestCase: function(){
+				return this.testcase
+			},
+			setTestCase: function(tc){
+				this.testcase = this.tcs[tc];
+			},
+			countTestCases: function(){
+				return this.count;
 			}
 		}
 		
@@ -133,15 +108,51 @@
 		    return Sk.builtinFiles["files"][x];
 		}
 
-
-		function runit() { 
-		   testcases.init()
+		function runit() {
 		   var prog = editor.getSession().getValue(); 
 		   var mypre = document.getElementById("output"); 
+		   // var tc = testcase
 		   mypre.innerHTML = ''; 
+			// console.log(testcase)
 
 		   Sk.pre = "output";
-		   Sk.configure({inputfun:passinput, output:outf, read:builtinRead}); 
+		   Sk.configure({
+				inputfun: function(prompt){
+					testcases.init()
+					input = testcases.getTestCase().input;
+
+					// console.log(testcases)
+				    return new Promise((resolve, reject) => {
+				        let inputLines = input[0];
+		        		resolve(inputLines);
+				    });
+				},
+				output: function(text){
+					testcases.init()
+					input = testcases.getTestCase().input;
+					output = testcases.getTestCase().output;
+					// console.log(input[0])
+
+					if (text.replace(/\n/g, "") !== "") {
+					    if (text == output){
+					    	var mypre = document.getElementById("output");
+					    	mypre.innerHTML += "<b style='color:green'>Testcase Passed</b>";
+					    	mypre.innerHTML += "\nInput: "+input[0];
+					   	    mypre.innerHTML += "\nExpected: "+output[0];
+					    	mypre.innerHTML += "\nGot: "+text+"\n\n";
+					    }else{
+					    	var mypre = document.getElementById("output");
+					    	// mypre.innerHTML = ""
+					    	mypre.innerHTML += "<b style='color:red'>Testcase Failed</b>";
+					    	mypre.innerHTML += "\nInput: "+input[0];
+					    	mypre.innerHTML += "\nExpected: "+output[0];
+					    	mypre.innerHTML += "\nGot: "+text+"\n\n";
+					    }
+					}
+				}, 
+				read:builtinRead
+			}); 
+
 		   var myPromise = Sk.misceval.asyncToPromise(function() {
 		   		try {
 		   			op = Sk.importMainWithBody("<stdin>", false, prog, true);
@@ -162,14 +173,21 @@
 		   	 //    $("#output").text(err.toString());
 		        // return;
 		        sErr = err.toString(); 
-				outf(sErr);
+				// outf(sErr);
+				console.log(sErr)
 		        $("#showoutput").click();
 		   });
 		}
 	    
 	    $("#testrun").click(function(e){
 	    	e.preventDefault();
-	    	runit();
+	    	testcases.init();
+	    	no_of_tc = testcases.countTestCases();
+	    	for(var i=1; i<=no_of_tc; i++){
+	    		testcases.setTestCase("testcase"+(i))
+	    		console.log(testcases.getTestCase())
+	    		runit();
+	    	}
 			// $("#output").text(editor.getSession().getValue());
 		})
 	</script>
