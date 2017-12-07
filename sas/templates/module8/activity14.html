@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% block head %}
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/styles/navbar.css">
+	<link rel="stylesheet" href="/styles/fileupload.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script type="text/javascript" src="/scripts/module.js"></script>
+{% endblock %}
+{% block title %}ADS I - Module 8{% endblock %}
+{% block body %}
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row" id="main" >
+                <div class="col-sm-12 col-md-7" id="content">
+					<div>
+						<div>
+<h3 id="form-title">Module 8 Activity 14 - Final Activity</h3>
+							<hr>
+						</div>
+						<div>
+							<div>
+<p id="form-description"></p>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-12 col-md-7"><br>
+				<div id="status"></div>
+<form action="/submitactivity/8/14" method="POST">
+				  <div class="form-group form-question well well-sm">
+						<div class="checkbox">
+						  <label><input id="q1" type="checkbox" name="8.14.1 I agree that the answers to problems is my own work (except for assignments that explicitly permit collaboration)." value="checked">8.14.1 I agree that the answers to problems is my own work (except for assignments that explicitly permit collaboration).</label>
+						</div>
+				  </div>
+				  <div class="form-group form-question well well-sm">
+<label for="q2" class="form-question-text">8.14.2 Lessons learned in this module.</label>
+<textarea class="form-control form-question-input" type="textarea" name="8.14.2 Lessons learned in this module." id="q2" placeholder="Enter your response here"></textarea>
+				    <small id="q1desc" class="form-text text-muted form-question notes"></small>
+				  </div>
+				  <div class="form-group form-question well well-sm">
+<label for="q3" class="form-question-text">8.14.1 Overall rating of the Module.</label>
+				    <div class="radio">
+					  <label>
+					    <input type="radio" name="8.14.1 Overall rating of the Module." id="q3" value="Bad">
+					    Bad
+					  </label>
+					</div>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="8.14.1 Overall rating of the Module." id="q3" value="Mediocre">
+					    Mediocre
+					  </label>
+					</div>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="8.14.1 Overall rating of the Module." id="q3" value="Good">
+					    Good
+					  </label>
+					</div>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="8.14.1 Overall rating of the Module." id="q3" value="Excellent">
+					    Excellent
+					  </label>
+					</div>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="8.14.1 Overall rating of the Module." id="q3" value="Outstanding">
+					    Outstanding
+					  </label>
+					</div>
+				    <small id="q1desc" class="form-text text-muted form-question notes"></small>
+				  </div>
+				  <!-- <div class="form-group form-question well well-sm">
+<label for="q3" class="form-question-text">8.14.1 Overall rating of the Module.</label>
+				    <textarea class="form-control form-question-input" type="textarea" name="8.3 I have skipped this video because" id="q3" placeholder="Enter your response here"></textarea>
+				    <small id="q1desc" class="form-text text-muted form-question notes"></small>
+				  </div> -->
+				  <button type="submit" class="btn btn-primary">Submit</button>
+				</form><br>
+				<div class="row">
+					<div class="col-md-6 text-left">
+<a href="/activity/8/13" class="btn btn-default btn-lg">Activity 13</span></a>
+					</div>
+					<div class="col-md-6 text-right">
+						
+					</div>
+				</div>
+			</div>
+			<!-- <div class="col-sm-12 col-md-5">
+				<ul style="list-style-type: None">
+					<li><h4><a href="/playvideo/content/1/01.1. Course Introduction.mp4" target="_blank">01.1. Course Introduction<small> [video]</small></a></h4></li>
+					<li><h4><a href="/playvideo/content/1/010.2. Dynamic Connectivity.mp4" target="_blank">010.2. Dynamic Connectivity<small> [video]</small></a></h4></li>
+					<li><h4><a href="/playvideo/content/1/08.8. Quick Find.mp4" target="_blank">08.8. Quick Find<small> [video]</small></a></h4></li>
+				</ul>
+			</div> -->
+        </div>
+    </div>
+    {% for key, value in questions.iteritems() %}
+    <script type="text/javascript">
+    	console.log(document.getElementsByName("{{key}}"))
+    	switch(document.getElementsByName("{{key}}")[0].type){
+    		case "radio":
+    			$('input[value="{{ value }}"]').prop('checked',true)
+    			$('#status').html('<div style="color: black; padding: 5px" class="panel panel-success"><b><span class="glyphicon glyphicon-ok" style="color: green" aria-hidden="true"></span> Submitted.</b></div>');
+    			break;
+    		case "textarea":
+    			$('textarea[name="{{ key }}"]').prop('value',"{{value}}")
+    			$('#status').html('<div style="color: black; padding: 5px" class="panel panel-success"><b><span class="glyphicon glyphicon-ok" style="color: green" aria-hidden="true"></span> Submitted.</b></div>');
+    			break;
+				case "checkbox":
+    			$('input[name="{{ key }}"]').prop('checked',true)
+    			$('#status').html('<div style="color: black; padding: 5px" class="panel panel-success"><b><span class="glyphicon glyphicon-ok" style="color: green" aria-hidden="true"></span> Submitted.</b></div>');
+    			break;
+    	}
+    </script>
+    <script type="text/javascript" src="/scripts/fileupload.js"></script>
+    {%endfor%}
+{% endblock %}

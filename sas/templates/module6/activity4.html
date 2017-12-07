@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% block title %}ADS I - Module 6{% endblock %}
+{% block body %}
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row" id="main" >
+                <div class="col-sm-12 col-md-7" id="content">
+					<div>
+						<div>
+							<h3 id="form-title">Activity 4 - Watch the video on Queue Applications</h3>
+							<hr>
+						</div>
+						<div>
+							<div>
+								<p id="form-description">
+									Watch the following video on Queue Applications.<br>
+									<a href="/playvideo/content/6/18.6. Queue Applications.mp4" target="_blank">18.6. Queue Applications</a>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-12 col-md-7"><br>
+				<div id="status"></div>
+				<form action="/submitactivity/6/4" method="POST">
+				  <div class="form-group form-question well well-sm">
+				    <label for="q1" class="form-question-text">6.4.1 Write a summary of your learning from this video.</label>
+				    <textarea class="form-control form-question-input" type="textarea" name="6.4.1 Write a summary of your learning from this video." id="q1" placeholder="Enter your response here"></textarea>
+				    <small id="q1desc" class="form-text text-muted form-question notes"></small>
+				  </div>
+				  <div class="form-group form-question well well-sm">
+				    <label for="q2" class="form-question-text">6.4.2 How would you rate the video</label>
+				    <div class="radio">
+					  <label>
+					    <input type="radio" name="6.4.2 How would you rate the video" id="optionsRadios1" value="Bad">
+					    Bad
+					  </label>
+					</div>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="6.4.2 How would you rate the video" id="optionsRadios1" value="Mediocre">
+					    Mediocre
+					  </label>
+					</div>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="6.4.2 How would you rate the video" id="optionsRadios1" value="Good">
+					    Good
+					  </label>
+					</div>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="6.4.2 How would you rate the video" id="optionsRadios1" value="Excellent">
+					    Excellent
+					  </label>
+					</div>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="6.4.2 How would you rate the video" id="optionsRadios2" value="Outstanding">
+					    Outstanding
+					  </label>
+					</div>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="6.4.2 How would you rate the video" id="optionsRadios2" value="Skipped the Video">
+					    Skipped the Video
+					  </label>
+					</div>
+				    <small id="q1desc" class="form-text text-muted form-question notes"></small>
+				  </div>
+				  <div class="form-group form-question well well-sm">
+				    <label for="q3" class="form-question-text">6.4.3 I have skipped this video because</label>
+				    <textarea class="form-control form-question-input" type="textarea" name="6.4.3 I have skipped this video because" id="q3" placeholder="Enter your response here"></textarea>
+				    <small id="q1desc" class="form-text text-muted form-question notes"></small>
+				  </div>
+				  <button type="submit" class="btn btn-primary">Submit</button>
+				</form><br>
+				<div class="row">
+					<div class="col-md-6 text-left">
+						<a href="/activity/6/3" class="btn btn-default btn-lg">Activity 3</span></a>
+					</div>
+					<div class="col-md-6 text-right">
+						<a href="/activity/6/5" class="btn btn-default btn-lg">Activity 5</span></a>
+					</div>
+				</div>
+			</div>
+			<!-- <div class="col-sm-12 col-md-5">
+				<ul style="list-style-type: None">
+					<li><h4><a href="/playvideo/content/1/01.1. Course Introduction.mp4" target="_blank">01.1. Course Introduction<small> [video]</small></a></h4></li>
+					<li><h4><a href="/playvideo/content/1/02.2. Dynamic Connectivity.mp4" target="_blank">02.2. Dynamic Connectivity<small> [video]</small></a></h4></li>
+					<li><h4><a href="/playvideo/content/1/18.6. Queue Applications" target="_blank">03.3. Quick Find<small> [video]</small></a></h4></li>
+				</ul>
+			</div> -->
+        </div>
+    </div>
+    {% for key, value in questions.iteritems() %}
+    <script type="text/javascript">
+    	console.log(document.getElementsByName("{{key}}"))
+    	switch(document.getElementsByName("{{key}}")[0].type){
+    		case "radio":
+    			$('input[value="{{ value }}"]').prop('checked',true)
+    			$('#status').html('<div style="color: black; padding: 5px" class="panel panel-success"><b><span class="glyphicon glyphicon-ok" style="color: green" aria-hidden="true"></span> Submitted.</b></div>');
+    			break;
+    		case "textarea":
+    			$('textarea[name="{{ key }}"]').prop('value',"{{value}}")
+    			$('#status').html('<div style="color: black; padding: 5px" class="panel panel-success"><b><span class="glyphicon glyphicon-ok" style="color: green" aria-hidden="true"></span> Submitted.</b></div>');
+    			break;
+    	}
+    </script>
+    {%endfor%}
+{% endblock %}

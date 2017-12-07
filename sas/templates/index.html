@@ -1,0 +1,413 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <style type="text/css">
+      .heading{
+      	margin-top: 0px;	
+      	padding: 25px;
+      	background-color: black;
+        color: white;
+        font-family: 'Open Sans', sans-serif;
+      }
+      .sub-heading {
+        color: #8a6d3b;
+        font-family: 'Open Sans', sans-serif;
+      }
+      .paragraph {
+        font-family: 'Open Sans', sans-serif;
+      }
+      .tree, .tree ul {
+          margin:0;
+          padding:0;
+          list-style:none
+      }
+      .tree ul {
+          margin-left:1em;
+          position:relative
+      }
+      .tree ul ul {
+          margin-left:.5em
+      }
+      .tree ul:before {
+          content:"";
+          display:block;
+          width:0;
+          position:absolute;
+          top:0;
+          bottom:0;
+          left:0;
+          border-left:1px solid
+      }
+      .tree li {
+          margin:0;
+          padding:0 1em;
+          line-height:2em;
+          position:relative
+      }
+      .tree ul li:before {
+          content:"";
+          display:block;
+          width:10px;
+          height:0;
+          border-top:1px solid;
+          margin-top:-1px;
+          position:absolute;
+          top:1em;
+          left:0
+      }
+      .tree ul li:last-child:before {
+          background:#fff;
+          height:auto;
+          top:1em;
+          bottom:0
+      }
+      .indicator {
+          margin-right:5px;
+          font-size: small; 
+      }
+      .tree li a {
+          text-decoration: none;
+          color:#369;
+      }
+      .tree li button, .tree li button:active, .tree li button:focus {
+          text-decoration: none;
+          color:#369;
+          border:none;
+          background:transparent;
+          margin:0px 0px 0px 0px;
+          padding:0px 0px 0px 0px;
+          outline: 0;
+      }
+      .btn-lg {
+      	border-radius: 0px !important;
+      }
+    </style>
+  </head>
+  <body>
+      <h3 class="heading">Franklin Jefferson University</h3>
+      <div class="container">
+        <div class="row">
+          <div class="row">
+          	<h2 class="col-sm-12 col-md-8">Computer Science Principles and Programming</h2>
+          	<div class="col-md-4 text-right">
+          		<br>
+          		<a href="/module/1" class="btn btn-lg btn-primary">Go to Course Page</a>
+          	</div>
+          </div>
+          <div class="col-sm-12 col-md-12">
+            <div class="row">
+              <h3 class="sub-heading">Instructor</h3><hr>
+              <div class="col-md-12 col-sm-12">
+                <h4>FJU Professor</h4>
+                <p>Professor, FJU.</p>
+                <a href="#">instructor@fju.us</a>
+              </div>
+            </div><br>
+            <div class="row">
+              <h3 class="sub-heading">Course Description</h3><hr>
+                <p class="paragraph">This course is an introduction to computer science as a tool to solve real-world analytical problems. It is designed to help people with no prior exposure to computer science or programming learn to think computationally and write programs to tackle useful problems. This run features updated lecture videos, lecture exercises, and problem sets to use the new version of Python 3.5. Even if you took the course with Python 2.7, you will be able to easily transition to Python 3.5 in future courses.</p>
+                <p class="paragraph">The goal of this course is to provide students with a brief introduction to many topics so they will have an idea of what is possible when they need to think about how to use computation to accomplish some goal later in their career. That said, they are not "computation appreciation" courses. They are challenging and rigorous courses in which the students spend a lot of time and effort learning to bend the computer to their will.</p>
+            </div>
+            <div class="row">
+              <h3 class="sub-heading">Reference Textbooks</h3><hr>
+              <a href="https://mitpress.mit.edu/books/introduction-computation-and-programming-using-python-1" target="_blank">Introduction to Computation and Programming Using Python, Second Edition (With Application to Understanding Data)</a>
+            </div><br>
+            <div class="row">
+              <h3 class="sub-heading">Learning Outcome</h3><hr>
+              <p class="paragraph">Here is what you learn from this course</p>
+              <ul class="paragraph">
+                <li>A Notion of computation</li>
+                <li>The Python programming language</li>
+                <li>Some simple algorithms</li>
+                <li>Testing and debugging</li>
+                <li>An informal introduction to algorithmic complexity</li>
+                <li>Data structures</li>
+              </ul>
+            </div>
+            <div class="row">
+              <h3 class="sub-heading">Syllabus and Lecture Topics</h3><hr>
+              <ul id="tree3" class="paragraph">
+                <li>
+                  <a>Week - 1</a>
+                  <ul>
+                    <li>Lecture 1 – Introduction to Python:
+                      <ul class="paragraph">
+                        <li>Knowledge</li>
+                        <li>Machines</li>
+                        <li>Languages</li>
+                        <li>Types</li>
+                        <li>Variables</li>
+                        <li>Operators and Branching</li>
+                      </ul>
+                    </li>
+                    <li>Lecture 2 – Core elements of programs:
+                      <ul class="paragraph">
+                        <li>Bindings</li>
+                        <li>Strings</li>
+                        <li>Input/Output</li>
+                        <li>IDEs</li>
+                        <li>Control Flow</li>
+                        <li>Iteration</li>
+                        <li>Guess and Check</li>
+                      </ul>
+                    </li>
+                    <li>Problem Set - 1</li>
+                  </ul>
+                </li>
+                <li>
+                  <a>Week - 2</a>
+                  <ul>
+                    <li>Lecture 3 – Simple Programs:
+                      <ul class="paragraph">
+                        <li>Approximate Solutions</li>
+                        <li>Bisection Search</li>
+                        <li>Floats and Fractions</li>
+                        <li>Newton-Raphson</li>
+                      </ul>
+                    </li>
+                    <li>Lecture 4 – Functions:
+                      <ul class="paragraph">
+                        <li>Decomposition and Abstraction</li>
+                        <li>Functions and Scope</li>
+                        <li>Keyword Arguments</li>
+                        <li>Specifications</li>
+                        <li>Iteration vs Recursion</li>
+                        <li>Inductive Reasoning</li>
+                        <li>Towers of Hanoi</li>
+                        <li>Fibonacci</li>
+                        <li>Recursion on non-numerics</li>
+                        <li>Files</li>
+                      </ul>
+                    </li>
+                    <li>Problem Set - 2</li>
+                  </ul>
+                </li>
+                <li>
+                  <a>Week - 3</a>
+                  <ul>
+                    <li>Lecture 5 – Tuples and Lists:
+                      <ul class="paragraph">
+                        <li>Tuples</li>
+                        <li>Lists</li>
+                        <li>List Operations</li>
+                        <li>Mutation, Aliasing, Cloning</li>
+                      </ul>
+                    </li>
+                    <li>Lecture 6 – Dictionaries:
+                      <ul class="paragraph">
+                        <li>Functions as Objects</li>
+                        <li>Dictionaries</li>
+                        <li>Example with a Dictionary</li>
+                        <li>Fibonacci and Dictionaries</li>
+                        <li>Global Variables</li>
+                      </ul>
+                    </li>
+                    <li>Problem Set - 3</li>
+                  </ul>
+                </li>
+                <li>
+                  <a>Week - 4</a>
+                  <ul>
+                    <li>Lecture 7 – Debugging:
+                      <ul class="paragraph">
+                        <li>Programming Challenges</li>
+                        <li>Classes of Tests</li>
+                        <li>Bugs</li>
+                        <li>Debugging</li>
+                        <li>Debugging Examples</li>
+                      </ul>
+                    </li>
+                    <li>Lecture 8 – Assertions and Exceptions
+                      <ul class="paragraph">
+                        <li>Assertions</li>
+                        <li>Exceptions</li>
+                        <li>Exception Examples</li>
+                      </ul>
+                    </li>
+                    <li>Problem Set - 4</li>
+                  </ul>
+                </li>
+                <li>
+                  <a>Week - 5</a>
+                  <ul>
+                    <li>Lecture 9 – Classes and Inheritance:
+                      <ul class="paragraph">
+                        <li>Object Oriented Programming</li>
+                        <li>Class Instances</li>
+                        <li>Methods</li>
+                        <li>Classes Examples</li>
+                        <li>Why OOP</li>
+                        <li>Hierarchies</li>
+                        <li>Your Own Types</li>
+                      </ul>
+                    </li>
+                    <li>Lecture 10 – An Extended Example:
+                      <ul class="paragraph">
+                        <li>Building a Class</li>
+                        <li>Viualizing the Hierarchy</li>
+                        <li>Adding another Class</li>
+                        <li>Using Inherited Methods</li>
+                        <li>Gradebook Example</li>
+                        <li>Generators</li>
+                      </ul>
+                    </li>
+                    <li>Problem Set - 5</li>
+                  </ul>
+                </li>
+                <li>
+                  <a>Week - 6</a>
+                  <ul>
+                    <li>Lecture 11 – Computational Complexity:
+                      <ul class="paragraph">
+                        <li>Program Efficiency</li>
+                        <li>Big Oh Notation</li>
+                        <li>Complexity Classes</li>
+                        <li>Analyzing Complexity</li>
+                      </ul>
+                    </li>
+                    <li>Lecture 12 – Searching and Sorting Algorithms:
+                      <ul class="paragraph">
+                        <li>Indirection</li>
+                        <li>Linear Search</li>
+                        <li>Bisection Search</li>
+                        <li>Bogo and Bubble Sort</li>
+                        <li>Selection Sort</li>
+                        <li>Merge Sort</li>
+                      </ul>
+                    </li>
+                    <li>Problem Set - 6</li>
+                  </ul>
+                </li>
+                <li>
+                  <a>Week - 7</a>
+                  <ul>
+                    <li>Lecture 13 – Visualization of Data:
+                      <ul class="paragraph">
+                        <li>Visualizing Results</li>
+                        <li>Overlapping Displays</li>
+                        <li>Adding More Documentation</li>
+                        <li>Changing Data Display</li>
+                        <li>An Example</li>
+                      </ul>
+                    </li>
+                    <li href="#">Lecture 14 – Summary</li>
+                  </ul>
+                </li>
+                <li>Final Exam</li>
+              </ul>
+            </div>
+            <div class="row">
+              <h3 class="sub-heading">Evaluation and Grading</h3><hr>
+              <p class="paragraph">In this course there will be many types of assignments. Your final grade will be a weighted average of the following exams:</p>
+              <ul class="paragraph">
+                <li>Problem Set - 1 (10%)</li>
+                <li>Problem Set - 2 (10%)</li>
+                <li>Problem Set - 3 (10%)</li>
+                <li>Problem Set - 4 (10%)</li>
+                <li>Problem Set - 5 (10%)</li>
+                <li>Problem Set - 6 (10%)</li>
+                <li>Final Exam (40%)</li>
+              </ul>
+              <p class="paragraph">In order to pass the course, students must secure a grade of C or better. The following grading breakdown will apply:</p>
+              <ul class="paragraph">
+                <li>>= 95%: Ex</li>
+                <li>>= 90%: A+</li>
+                <li>>= 85%: A</li>
+                <li>>= 80%: B+</li>
+                <li>>= 75%: B</li>
+                <li>>= 70%: C</li>
+                <li>< 70%: F</li>
+              </ul>
+            </div>
+            <div class="row">
+              <h3 class="sub-heading">Student Expectations</h3><hr>
+              <p class="paragraph"><b>This is a hard course. It is easy to get discouraged, but don’t!</b> As you will notice from the first assignment, there are many components and in order to successfully complete all parts, you have to:</p>
+              <ul class="paragraph">
+                <li>understand the relevant subtleties of the Python language</li>
+                <li>critically think about approaches to solve the problem</li>
+                <li>have good time management skills</li>
+                <li>pay close attention to deadlines</li>
+              </ul>
+              <p class="paragraph">You have to put in many hours, especially if you have never coded before. The course description does say that no coding experience is necessary, but as with anything else, prior experience will make it easier for you.</p>
+              <p class="paragraph"><b>Do original work.</b> Any form of plagiarism can earn you a failing grade for the entire course. Content copied from internet and reproduced verbatim in exams or other submissions is treated as plagiarized material, even if the source is cited.</p>
+              <p class="paragraph"><b>Research and Independent learning.</b> Independent research comes in many forms. But ultimately, it comes down to paying attention, repetition of the concepts, and practice practice practice! Your research can be done in many forms:</p>
+              <ul class="paragraph">
+                <li>try out code in your Python development environment (Canopy, IDLE, or whatever)</li>
+                <li>read the Python documentation or other Python tutorials</li>
+                <li>use a paper and pencil to sketch out solutions</li>
+                <li>if you have the textbook, read the relevant sections</li>
+              </ul>
+              <p class="paragraph"><b>We are all here to learn computer science.</b> We distinguish this course from other introductory computer science courses because of the accelerated pace and focus on students critically thinking about problems. We will stress practice as a very important part of learning. Start early and do little bits of exercises every day (during lunch breaks, 10 mins of goofing around on the Python shell every now and then, taking a piece of paper and a pen to your kid's soccer game, whatever), the material starts to seep in. This type of learning is highly encouraged.</p>
+              <br>
+              <p class="paragraph"><b>We hope you will keep at it and we wish you continued success in this course!</b></p>
+            </div>
+            <div class="row">
+              <h3 class="sub-heading">Useful Resources</h3><hr>
+              <a href="https://prod-edxapp.edx-cdn.org/assets/courseware/v1/956e2eedd1bc91f4381cb68a33f47b87/asset-v1:MITx+6.00.1x+2T2017_2+type@asset+block/6001x_additional_resources.pdf" target="_blank">Additional Resources</a>
+            </div>
+          </div>
+        </div>
+      </div><br><br>
+  </body>
+  <script type="text/javascript">
+    $.fn.extend({
+        treed: function (o) {
+          
+          var openedClass = 'glyphicon-minus-sign';
+          var closedClass = 'glyphicon-plus-sign';
+          
+          if (typeof o != 'undefined'){
+            if (typeof o.openedClass != 'undefined'){
+            openedClass = o.openedClass;
+            }
+            if (typeof o.closedClass != 'undefined'){
+            closedClass = o.closedClass;
+            }
+          };
+          
+            //initialize each of the top levels
+            var tree = $(this);
+            tree.addClass("tree");
+            tree.find('li').has("ul").each(function () {
+                var branch = $(this); //li with children ul
+                branch.prepend("<i class='indicator glyphicon " + closedClass + "'></i>");
+                branch.addClass('branch');
+                branch.on('click', function (e) {
+                    if (this == e.target) {
+                        var icon = $(this).children('i:first');
+                        icon.toggleClass(openedClass + " " + closedClass);
+                        $(this).children().children().toggle();
+                    }
+                })
+                branch.children().children().toggle();
+            });
+            //fire event from the dynamically added icon
+          tree.find('.branch .indicator').each(function(){
+            $(this).on('click', function () {
+                $(this).closest('li').click();
+            });
+          });
+            //fire event to open branch if the li contains an anchor instead of text
+            tree.find('.branch>a').each(function () {
+                // $(this).on('click', function (e) {
+                    $(this).closest('li').click();
+                    // e.preventDefault();
+                // });
+            });
+            //fire event to open branch if the li contains a button instead of text
+            tree.find('.branch>button').each(function () {
+                // $(this).on('click', function (e) {
+                    $(this).closest('li').click();
+                    // e.preventDefault();
+                // });
+            });
+        }
+    });
+
+    $('#tree3').treed({openedClass:'glyphicon-chevron-right', closedClass:'glyphicon-chevron-down'});
+  </script>
+</html>

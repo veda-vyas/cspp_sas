@@ -1,0 +1,177 @@
+{% extends "base.html" %}
+{% block title %}CSPP - Assignment 1{% endblock %}
+<style type="text/css" media="screen">
+    #editor { 
+        width: 500px;
+        height: 400px;
+    }
+</style>
+{% block body %}
+	<!-- <div id="page-wrapper">
+		<iframe src="https://trinket.io/embed/python/973918e2f1?toggleCode=true" width="100%" height="600" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+	</div> -->
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row" id="main" >
+                <div class="col-sm-12 col-md-6" id="content">
+					<div>
+						<div>
+							<h3 id="form-title">Problem 1</h3>
+							<hr>
+						</div>
+						<div>
+							<div>
+								<p id="form-description">Assume s is a string of lower case characters.</p>
+								<p>Write a program that counts up the number of vowels contained in the string s. Valid vowels are: 'a', 'e', 'i', 'o', and 'u'. For example, if s = 'azcbobobegghakl', your program should print:</p>
+								<pre>Number of vowels: 5</pre>
+								</p>
+							</div>
+							<hr>
+						</div>
+					</div>
+					<div class="text-right">
+						<a id="nextactivity" href="/activity/1/2" class="btn btn-default btn-lg hidden">Activity 2</a>
+					</div>
+				</div>
+				<div class="col-sm-12 col-md-6"><br>
+					<form action="/submitactivity/1/1" method="POST">
+					  	<div id="status"></div>
+					  	<div id="1.1.1 editor" style="height: 450px; width: 500px;">{{questions['1.1.1 editor']}}</div>
+					  	<textarea name="1.1.1 editor" style="display: none;"></textarea>
+						<div class="panel panel-success" style="width: 500px; padding: 5px;">
+						  	<a href="#" id="showoutput" class="text-right">
+						  		show output
+						  	</a>
+						  	<pre id="output" class="hidden"></pre>
+						</div>
+						<div class="">
+							  <div class="col-md-6 text-left">
+							  	<button id="testrun" class="btn btn-default">Test Run</button>
+							  </div>
+							  <div class="col-md-6 text-right">
+							  	<button type="submit" class="btn btn-success">Submit as Solution</button>
+							  </div>
+						</div>
+					</form>  
+				</div>
+			</div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.9/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/scripts/skulpt.min.js" type="text/javascript"></script> 
+	<script src="/scripts/skulpt-stdlib.js" type="text/javascript"></script> 
+	<script>
+		$("#showoutput").click(function(){
+			// var text = $(this).text() == 'hide output' ? 'show output' : 'hide output';
+			$(this).text('show output');
+			$("#output").removeClass("hidden");
+		})
+	    var editor = ace.edit("1.1.1 editor");
+	    
+	    editor.setTheme("ace/theme/monokai");
+	    editor.getSession().setMode("ace/mode/python");
+	    editor.setOptions({
+	    	fontSize: "12pt"
+	    })
+
+	    var textarea = $('textarea[name="1.1.1 editor"]');
+		textarea.val(editor.getSession().getValue());
+		
+		editor.getSession().on("change", function () {
+		    textarea.val(editor.getSession().getValue());
+		});
+
+		var testcase = {
+			init: function(){
+				this.input = 'vedavyas'
+				this.output = 3
+			},
+			inputr: function(){
+				return this.input;
+			},
+			outputr: function(){
+				return this.output;
+			}
+		}
+
+		
+		function passinput(prompt) {
+			testcase.init()
+		    return new Promise((resolve, reject) => {
+		        var inputLines = testcase.inputr();
+        		resolve(inputLines);
+		    })
+			// return window.prompt(prompt);
+		};
+
+
+		function outf(text) { 
+			testcase.init()
+		    var mypre = document.getElementById("output");
+		    text = text.replace(/\n/g, "")
+		    console.log("output: "+text)
+
+		    if (text == testcase.outputr()){
+		   	   $("#output").text(text.toString());
+		    }else{
+		    	mypre.innerHTML += "Testcase Failed\n";
+		    	mypre.innerHTML += "\nOutputs mismatch for input: "+testcase.inputr();
+		    	mypre.innerHTML += "\nExpected: "+testcase.outputr();
+		    	mypre.innerHTML += "\nGot: "+text;
+		    }
+		    // mypre.innerHTML =  
+		}
+		
+		function builtinRead(x) {
+		    if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
+		    	throw "File not found: '" + x + "'";
+		    return Sk.builtinFiles["files"][x];
+		}
+
+
+		function runit() { 
+		   var prog = editor.getSession().getValue(); 
+		   var mypre = document.getElementById("output"); 
+		   mypre.innerHTML = ''; 
+		   Sk.pre = "output";
+		   Sk.configure({inputfun:passinput, inputfunTakesPrompt: true, output:outf, read:builtinRead}); 
+		   var myPromise = Sk.misceval.asyncToPromise(function() {
+		   		try {
+		   			op = Sk.importMainWithBody("<stdin>", false, prog, true);
+		   			console.log(op)
+		   		}
+		   		catch(e){
+		   			op = e
+		   			mypre.innerHTML += e.toString()
+		   		}
+		   		return op
+		   });
+		   myPromise.then(function(mod) {
+		       $("#showoutput").click();
+		   },
+		   function(err) {
+		    	// var mypre = document.getElementById("output");
+		    	// mypre.innerHTML = mypre.innerHTML+"Testcases failed"; 
+		   	 //    $("#output").text(err.toString());
+		        // return;
+		        sErr = e.toString(); 
+				outf(sErr);
+		        $("#showoutput").click();
+		   });
+		}
+	    
+	    $("#testrun").click(function(e){
+	    	e.preventDefault();
+	    	runit();
+			// $("#output").text(editor.getSession().getValue());
+		})
+	</script>
+
+	{% for key, value in questions.iteritems() %}
+    <script type="text/javascript">
+    	if("{{key}}" == "editor"){
+			editor.setValue('{{value | replace("\n", "\\n")}}');
+    	}
+    </script>
+    {%endfor%}
+{% endblock %}

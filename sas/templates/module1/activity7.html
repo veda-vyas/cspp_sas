@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% block title %}ADS I - Module 1{% endblock %}
+{% block body %}
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row" id="main" >
+                <div class="col-sm-12 col-md-7" id="content">
+					<div>
+						<div>
+							<h3 id="form-title">Activity 7 - Participate in the Code Review on Quick Find</h3>
+							<hr>
+						</div>
+						<div>
+							<div>
+								<p id="form-description">
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-12 col-md-7"><br>
+				<div id="status"></div>
+				<form action="/submitactivity/1/7" method="POST">
+				  <div class="form-group form-question well well-sm">
+				    <label for="q2" class="form-question-text">7.1 How would you rate the code review on Quick Find?</label>
+				    <div class="radio">
+					  <label>
+					    <input type="radio" name="7.1 How would you rate the code review on Dynamic Connectivity?" id="optionsRadios1" value="Bad">
+					    Bad
+					  </label>
+					</div>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="7.1 How would you rate the code review on Dynamic Connectivity?" id="optionsRadios1" value="Mediocre">
+					    Mediocre
+					  </label>
+					</div>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="7.1 How would you rate the code review on Dynamic Connectivity?" id="optionsRadios1" value="Good">
+					    Good
+					  </label>
+					</div>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="7.1 How would you rate the code review on Dynamic Connectivity?" id="optionsRadios1" value="Excellent">
+					    Excellent
+					  </label>
+					</div>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="7.1 How would you rate the code review on Dynamic Connectivity?" id="optionsRadios2" value="Outstanding">
+					    Outstanding
+					  </label>
+					</div>
+				    <small id="q1desc" class="form-text text-muted form-question notes"></small>
+				  </div>
+				  <div class="form-group form-question well well-sm">
+				    <label for="q1" class="form-question-text">7.2 Write a summary of your learning from the code review.</label>
+				    <textarea class="form-control form-question-input" type="textarea" name="7.2 Write a summary of your learning from the code review." id="q1" placeholder="Enter your response here"></textarea>
+				    <small id="q1desc" class="form-text text-muted form-question notes"></small>
+				  </div>
+				  <div class="form-group form-question well well-sm">
+				    <label for="q3" class="form-question-text">7.3 I have skipped this review because</label>
+				    <textarea class="form-control form-question-input" type="textarea" name="7.3 I have skipped this review because" id="q3" placeholder="Enter your response here"></textarea>
+				    <small id="q1desc" class="form-text text-muted form-question notes"></small>
+				  </div>
+				  <button type="submit" class="btn btn-primary">Submit</button>
+				</form><br>
+				<div class="row">
+					<div class="col-md-6 text-left">
+						<a href="/activity/1/6" class="btn btn-default btn-lg">Activity 6</span></a>
+					</div>
+					<div class="col-md-6 text-right">
+						<a href="/activity/1/8" class="btn btn-default btn-lg">Activity 8</span></a>
+					</div>
+				</div>
+			</div>
+			<!-- <div class="col-sm-12 col-md-5">
+				<ul style="list-style-type: None">
+					<li><h4><a href="/playvideo/content/1/01.1. Course Introduction.mp4" target="_blank">01.1. Course Introduction<small> [video]</small></a></h4></li>
+					<li><h4><a href="/playvideo/content/1/02.2. Dynamic Connectivity.mp4" target="_blank">02.2. Dynamic Connectivity<small> [video]</small></a></h4></li>
+					<li><h4><a href="/playvideo/content/1/03.3. Quick Find.mp4" target="_blank">03.3. Quick Find<small> [video]</small></a></h4></li>
+				</ul>
+			</div> -->
+        </div>
+    </div>
+    {% for key, value in questions.iteritems() %}
+    <script type="text/javascript">
+    	console.log(document.getElementsByName("{{key}}"))
+    	switch(document.getElementsByName("{{key}}")[0].type){
+    		case "radio":
+    			$('input[value="{{ value }}"]').prop('checked',true)
+    			$('#status').html('<div style="color: black; padding: 5px" class="panel panel-success"><b><span class="glyphicon glyphicon-ok" style="color: green" aria-hidden="true"></span> Submitted.</b></div>');
+    			break;
+    		case "textarea":
+    			$('textarea[name="{{ key }}"]').prop('value',"{{value}}")
+    			$('#status').html('<div style="color: black; padding: 5px" class="panel panel-success"><b><span class="glyphicon glyphicon-ok" style="color: green" aria-hidden="true"></span> Submitted.</b></div>');
+    			break;
+    	}
+    </script>
+    {%endfor%}
+{% endblock %}
