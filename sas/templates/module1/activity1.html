@@ -81,8 +81,26 @@
 		var testcases = {
 			init: function(){
 				this.tcs = {
-					"testcase1":{input:["vedavyas"],output:[3]},
-					"testcase2":{input:["xyoxotaaloozyimjxduseo"],output:[10]}
+					"testcase1":{input:["pirpnhj"],output:["Number of vowels: 1"]},
+					"testcase2":{input:["xyoxotaaloozyimjxduseo"],output:["Number of vowels: 10"]},
+					"testcase3":{input:["oqoeeqlawjuteaogx"],output:["Number of vowels: 9"]},
+					"testcase4":{input:["jhcuagees"],output:["Number of vowels: 4"]},
+					"testcase5":{input:["ojuaaovmctootichurjeio"],output:["Number of vowels: 12"]},
+					"testcase6":{input:["irdlafrbtjxnibaoiv"],output:["Number of vowels: 6"]},
+					"testcase7":{input:["xnkhaq"],output:["Number of vowels: 1"]},
+					"testcase8":{input:["avrojiiyou"],output:["Number of vowels: 6"]},
+					"testcase9":{input:["dltzndjoccnuusosovmywpxh"],output:["Number of vowels: 5"]},
+					"testcase10":{input:["cpimijij"],output:["Number of vowels: 3"]},
+					"testcase11":{input:["demhuflrsttlzmnrunjuo"],output:["Number of vowels: 5"]},
+					"testcase12":{input:["evdoene"],output:["Number of vowels: 4"]},
+					"testcase13":{input:["ivclmede"],output:["Number of vowels: 3"]},
+					"testcase14":{input:["kouariocuirigpuuivvn"],output:["Number of vowels: 11"]},
+					"testcase15":{input:["fhlevlyobveqbrp"],output:["Number of vowels: 3"]},
+					"testcase16":{input:["ajavbcpqnojjcsuhagnwpi"],output:["Number of vowels: 6"]},
+					"testcase17":{input:["whlachpkztoasyhraeqguiyf"],output:["Number of vowels: 7"]},
+					"testcase18":{input:["bnseawmpfnenrl"],output:["Number of vowels: 3"]},
+					"testcase19":{input:["wncgvlkyvhftevicbht"],output:["Number of vowels: 2"]},
+					"testcase20":{input:["yioxnviykh"],output:["Number of vowels: 3"]},
 				}
 				this.testcase = this.tcs["testcase1"]
 				this.count = Object.keys(this.tcs).length
@@ -182,7 +200,8 @@
 		   },
 		   function(err) {
 		        sErr = err.toString(); 
-				console.log(sErr)
+				var mypre = document.getElementById("output");
+				mypre.innerHTML = sErr;
 		        $("#showoutput").click();
 		   });
 
