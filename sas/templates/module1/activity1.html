@@ -97,29 +97,39 @@
 		
 		function passinput(prompt) {
 			testcase.init()
+		    console.log(new Promise((resolve, reject) => {
+		        var inputLines = testcase.inputr();
+        		resolve(inputLines);
+		    }));
 		    return new Promise((resolve, reject) => {
 		        var inputLines = testcase.inputr();
         		resolve(inputLines);
-		    })
+		    });
 			// return window.prompt(prompt);
 		};
 
 
 		function outf(text) { 
 			testcase.init()
-		    var mypre = document.getElementById("output");
-		    text = text.replace(/\n/g, "")
-		    console.log("output: "+text)
-
+		    // text = text.replace(/\n/g, "")
+		    // console.log("output: "+text)
+		    console.log("Expected: "+text);
+		    console.log("Actual: "+testcase.outputr());
 		    if (text == testcase.outputr()){
-		   	   $("#output").text(text.toString());
+		    	var mypre = document.getElementById("output");
+		    	mypre.innerHTML += "<b style='color:green'>Testcase Passed</b>";
+		    	mypre.innerHTML += "\nInput: "+testcase.inputr();
+		   	    mypre.innerHTML += "\nExpected: "+testcase.outputr();
+		    	mypre.innerHTML += "\nGot: "+text+"\n\n";
 		    }else{
-		    	mypre.innerHTML += "Testcase Failed\n";
-		    	mypre.innerHTML += "\nOutputs mismatch for input: "+testcase.inputr();
+		    	var mypre = document.getElementById("output");
+		    	// mypre.innerHTML = ""
+		    	mypre.innerHTML += "<b style='color:red'>Testcase Failed</b>";
+		    	mypre.innerHTML += "\nInput: "+testcase.inputr();
 		    	mypre.innerHTML += "\nExpected: "+testcase.outputr();
-		    	mypre.innerHTML += "\nGot: "+text;
+		    	mypre.innerHTML += "\nGot: "+text+"\n\n";
 		    }
-		    // mypre.innerHTML =  
+		    // mypre.innerHTML += text 
 		}
 		
 		function builtinRead(x) {
@@ -130,15 +140,16 @@
 
 
 		function runit() { 
+		   testcase.init()
 		   var prog = editor.getSession().getValue(); 
 		   var mypre = document.getElementById("output"); 
 		   mypre.innerHTML = ''; 
 		   Sk.pre = "output";
-		   Sk.configure({inputfun:passinput, inputfunTakesPrompt: true, output:outf, read:builtinRead}); 
+		   Sk.configure({inputfun:passinput, output:outf, read:builtinRead}); 
 		   var myPromise = Sk.misceval.asyncToPromise(function() {
 		   		try {
 		   			op = Sk.importMainWithBody("<stdin>", false, prog, true);
-		   			console.log(op)
+		   			// console.log(op)
 		   		}
 		   		catch(e){
 		   			op = e
